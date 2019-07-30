@@ -46,6 +46,14 @@
   height: 330px;
 }
 
+.tiny-cover {
+  width: 76px;
+  height: 108px;
+  text-align: center;
+  display: inline-block;
+  margin: 0.5rem 0.75rem 0 0;
+}
+
 .small-cover-wrapper {
   width: 135px;
   height: 192px;
