@@ -193,7 +193,7 @@ class Profile extends Component {
                     />
                     <Divider horizontal>Backlog</Divider>
                     {backlog.length > 0 ? (
-                      <ListPreview games={backlog} />
+                      <ListPreview linkTo={`/user/${username}/backlog/`} games={backlog} />
                     ) : (
                       <Message className="no-content">
                         {me && me.username === username ? (

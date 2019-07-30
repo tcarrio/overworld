@@ -1,9 +1,9 @@
 import React from "react";
 import "./styles.css";
 
-const ListPreview = ({ games }) => (
+const ListPreview = ({ linkTo, games }) => (
   <div className="list-preview">
-    <a className="list-link" href="/">
+    <a className="list-link" href={linkTo}>
       <ul className="cover-list overlapped">
         {games.slice(0, 5).map(g => {
           return (

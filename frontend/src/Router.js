@@ -6,6 +6,7 @@ import Game from "./modules/game/";
 import { Navbar } from "./modules/app/components/";
 import App from "./modules/app/";
 import Profile from "./modules/profile/";
+import { Backlog } from "./modules/profile/components";
 import Settings from "./modules/settings/";
 import { loadUser } from "./modules/app/actions";
 
@@ -26,7 +27,8 @@ class AppRouter extends React.Component {
           <Switch>
             <Route path="/" exact component={App} />
             <Route path="/games/:slug" component={Game} />
-            <Route path="/user/:username" component={Profile} />
+            <Route exact path="/user/:username" component={Profile} />
+            <Route path="/user/:username/backlog" component={Backlog} />
             <Route path="/settings" component={Settings} />
             <Route component={notFound} />
           </Switch>
