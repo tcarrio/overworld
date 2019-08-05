@@ -54,6 +54,7 @@ h2 {
   background-color: #242c34 !important;
   box-shadow: inset 0 1px 0 hsla(0, 0%, 100%, 0.1);
   font-weight: 400 !important;
+  font-family: "Segoe UI", sans-serif;
   cursor: pointer;
 }
 
