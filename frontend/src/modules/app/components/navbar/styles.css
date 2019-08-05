@@ -61,8 +61,7 @@
   opacity: 0.85;
 }
 
-.navbar > .menu > a.item,
-.text {
+.navbar > .menu > a.item {
   letter-spacing: 0.035rem;
   font-weight: 700;
   text-shadow: 0 0 7px rgba(0, 0, 0, 0.55);
