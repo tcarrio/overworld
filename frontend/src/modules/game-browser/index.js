@@ -2,8 +2,7 @@ import React from "react";
 import "./styles.css";
 import { getPopular, getGameData } from "./actions";
 import { connect } from "react-redux";
-import { Button } from "semantic-ui-react";
-import { Backdrop } from "../app/components";
+import { Button, Grid, Container } from "semantic-ui-react";
 import GameTile from "./components/gametile";
 import FilterBar from "./components/filterbar/filterBar";
 
@@ -13,7 +12,7 @@ class GameBrowser extends React.Component {
     this.state = {
       filters: {
         genre: [],
-        date: [null, null], //[before, after]
+        date: [null, null] //[before, after]
       },
       filteredGames: []
     };
@@ -92,9 +91,9 @@ class GameBrowser extends React.Component {
   };
 
   hasActiveFilters = () => {
-    const filters = {...this.state.filters}
-    return(filters.genre.length || filters.date[0] || filters.date[1])
-  }
+    const filters = { ...this.state.filters };
+    return filters.genre.length || filters.date[0] || filters.date[1];
+  };
 
   handleFilterChange = (result, type) => {
     const filters = { ...this.state.filters };
@@ -145,49 +144,60 @@ class GameBrowser extends React.Component {
   render() {
     if (this.state.filteredGames.length > 0) {
       return (
-        <React.Fragment>
-          <h1 className="title">Check out some current popular games!</h1>
-          <Backdrop imageId={this.getRandomBackground()} />
+        <Container>
           <FilterBar
             setFilter={this.handleFilterChange}
             filters={{ ...this.state.filters }}
             activePicker={this.state.activePicker}
             removeFilter={this.removeFilters}
           />
-          <div className="game-grid">
-            {this.state.filteredGames.map((game, index) => {
-              return <GameTile game={game} key={"game" + index} />;
-            })}
-          </div>
-        </React.Fragment>
+          <Grid>
+            <Grid.Row centered>
+              {this.state.filteredGames.map((game, index) => {
+                return (
+                  <Grid.Column width={3}>
+                    <GameTile game={game} key={"game" + index} />
+                  </Grid.Column>
+                );
+              })}
+            </Grid.Row>
+          </Grid>
+        </Container>
       );
-    } 
-    else if (this.hasActiveFilters()){
+    } else if (this.hasActiveFilters()) {
       return (
-        <React.Fragment>
-        <h1 className="title">Check out some current popular games!</h1>
-        <FilterBar
-          setFilter={this.handleFilterChange}
-          filters={this.state.filters}
-          activePicker={this.state.activePicker}
-          removeFilter={this.removeFilters}
-        />
-        <h1>No Games found matching those filters.</h1>
-        </React.Fragment>
-      )
-    }
-    else {
-      //if data not get loaded display 20 loading tiles
-      return (
-        <React.Fragment>
-          <h1 className="title">Check out some current popular games!</h1>
+        <Container>
           <FilterBar
             setFilter={this.handleFilterChange}
             filters={this.state.filters}
             activePicker={this.state.activePicker}
             removeFilter={this.removeFilters}
           />
-          <div className="game-grid">
+          <h1>No Games found matching those filters.</h1>
+        </Container>
+      );
+    } else {
+      //if data not get loaded display 20 loading tiles
+      return (
+        <Container>
+          <FilterBar
+            setFilter={this.handleFilterChange}
+            filters={this.state.filters}
+            activePicker={this.state.activePicker}
+            removeFilter={this.removeFilters}
+          />
+          <Grid>
+            <Grid.Row>
+              {[...Array(20).keys()].map((val, index) => {
+                return (
+                  <Grid.Column width={4}>
+                    <GameTile key={index} game={null} />
+                  </Grid.Column>
+                );
+              })}
+            </Grid.Row>
+          </Grid>
+          {/* <div className="game-grid">
             {[...Array(20).keys()].map((val, index) => {
               return (
                 <div className="game-box" key={"game" + index}>
@@ -195,8 +205,8 @@ class GameBrowser extends React.Component {
                 </div>
               );
             })}
-          </div>
-        </React.Fragment>
+          </div> */}
+        </Container>
       );
     }
   }

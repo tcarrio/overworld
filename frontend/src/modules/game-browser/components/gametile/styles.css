@@ -1,0 +1,43 @@
+.ui.card.game-card {
+  background: #456;
+  border: none;
+  box-shadow: none;
+  width: 180px;
+  /* height: 347.05px; */
+  margin-bottom: 1.5rem;
+}
+
+.ui.card.game-card:hover {
+  background: #456;
+  box-shadow: none;
+}
+
+.ui.card.game-card .header {
+  width: 150px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.ui.card.game-card .header,
+.ui.card.game-card .description {
+  color: #bcd;
+  text-shadow: 0 0 7px rgba(0, 0, 0, 0.45);
+}
+
+.ui.card.game-card > .game-card-cover {
+  width: 180px;
+  height: 256px;
+}
+
+.ui.card.game-card-cover > img.ui.fluid.image.cover {
+  box-shadow: 0 0 0 1px rgb(48, 56, 64);
+  width: 100% !important;
+  height: 100% !important;
+  object-fit: cover;
+}
+
+/* .ui.card.game-card img {
+    width: 135px;
+    height: 192px;
+} */
