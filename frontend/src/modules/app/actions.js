@@ -79,9 +79,32 @@ export const register = ({ email, username, password }) => dispatch => {
       });
     })
     .catch(error => {
+      /**
+       * In the case of the backend being unavailable, the response
+       * may not contain the expected structure. Show the error string
+       * or a general error message to avoid unexpected behavior such
+       * as a string instead of error list.
+       *
+       * [See issue 104](https://github.com/danielgrijalva/overworld/issues/104)
+       */
+      console.log(JSON.stringify(Object.values(error.response.data)));
+      const data = error && error.response && error.response.data;
+      const type = typeof data
+
+      const payload = []
+      if (Array.isArray(data)) {
+        payload.push(...data);
+      } else if (type === 'function' || type === 'object' && !!data) {
+        payload.push(...Object.values(data).reduce((p, c) => [...p, ...c], []))
+      } else if (type === "string") {
+        payload.push(data);
+      } else {
+        payload.push("Sorry, an unexpected error occurred")
+      }
+
       dispatch({
         type: REGISTER_FAIL,
-        payload: Object.values(error.response.data)
+        payload
       });
     });
 };
